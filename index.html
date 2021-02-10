@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recognition Experiment</title>
+        <meta name="author" content="Jackie Spear"/>
+        <meta name="description" content="A psychology recognition memory experiment"/>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <script src="jspsych-6.1.0/jspsych.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-html-keyboard-response.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-external-html.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-survey-text.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-fullscreen.js"></script>
+        <script src="jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
+        <script src='stimuli/exp_text.js'></script>
+        <script src='stimuli/study_words.js'></script>
+        <script src='stimuli/test_words.js'></script>
+        <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body></body>
+    
+
+<!-- Allow remote storage on Google Firebase -->
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.12.0/firebase-database.js"></script>
+
+<!-- enter some javascript code-->
+<script type="text/javascript">
+// Firebase set up
+
+// See: https://crumplab.github.io/jspsychrexamples/FirebaseDemo/Instructions_FirebaseDemo.html 
+ // Your web app's Firebase configuration (given to us by firebase)
+ // Only need to change this chunk each time you're using a new Firebase Project
+ var firebaseConfig = {
+  apiKey: "AIzaSyDL2NlFJq5Nz8k3zpz3IxqZeHTa1oBUTto", // start changing at this line
+    authDomain: "fouritemrecognition2.firebaseapp.com",
+    databaseURL: "https://fouritemrecognition2-default-rtdb.firebaseio.com",
+    projectId: "fouritemrecognition2",
+    storageBucket: "fouritemrecognition2.appspot.com",
+    messagingSenderId: "413701622864",
+    appId: "1:413701622864:web:86290acc7314945fb41555",
+    measurementId: "G-3Y9P1JZFYP"  //last line that needs changing for new Firebase projects
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+  // Get a reference to the database service
+  var database = firebase.database();
+
+   // login anonymous user
+   firebase.auth().signInAnonymously().catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+  
+  // check if user can sign on to firebase 
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+  }
+  // ...
+});
+
+</script>
+
+<!-- enter javascript code -->
+<script type="text/javascript">
+/* Note this is a js (javascript) code chunk */
+
+
+// #######################################
+//  set up custom functions for experiment
+// #######################################
+
+// function to check if in fullscreen mode
+  function is_fullscreen(){
+  // check if in fullscreen mode
+  if(window.innerWidth == screen.width && window.innerHeight == screen.height){
+    return true;
+  }else{return false}
+  }
+
+// function to extract data from URL variables
+  function getUrlVars() { // #SONA
+    var vars = {}; // #SONA
+    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,function(m,key,value) { // #SONA
+        vars[key] = value; // #SONA
+    }); // #SONA
+    return vars; // #SONA
+  } // #SONA
+
+// function to go find data in the URL
+// should be provided a defualt (e.g., "") so that there will be no errors thrown
+  function getUrlParam(parameter, defaultvalue){ // #SONA
+    var urlparameter = defaultvalue; // #SONA
+    if(window.location.href.indexOf(parameter) > -1){ // #SONA
+        urlparameter = getUrlVars()[parameter]; // #SONA
+        } // #SONA
+    return urlparameter; // #SONA
+  }
+
+
+//<script>
+
+/* experiment parameters */
+
+// generate a random subject ID with 15 characters
+
+var subject_id = jsPsych.randomization.randomID(15);
+
+// get the id number for the SONA participant so that we can grant credits automatically
+var SONA_ID = getUrlParam('id','Empty');
+
+// Get the time that the experiment began (ms since 1 January 1970)
+var start_time = new Date().getTime();
+
+// record this data to all trials
+jsPsych.data.addProperties({
+  subject: subject_id,
+  StartTime: start_time,
+});
+
+
+// set up consent procedure
+var consent = {
+  type: "external-html",
+  url: "forms/consent.html",
+  cont_btn: "consent-btns",
+  data: {"phase": "Consent"}, //makes a column named phase in the data, and enters consent
+};
+
+// set up welcome screen 
+var welcome = {
+  type: "html-keyboard-response",
+  stimulus: welcome_text, // this variable exists in exp_text.js
+  data: {"phase": "Welcome",
+  },
+};
+
+// set up instructions screen (including attention check)
+var instructions = {
+  timeline: [
+    // first trial is displaying the experiment instructions
+    {
+      type: "html-keyboard-response",
+      stimulus: instruction_text,
+      data: {"phase": "Instructions"},
+    },
+    // second trial is displaying the instructions check
+    {
+      type: "survey-text",
+      questions: [
+        {
+          prompt: attention_check_text, 
+          columns: 20, 
+          rows: 1, 
+          required: true, 
+          name: "Attention_check"
+        },
+      ],
+      data: {"phase": "Attention_Check"},
+    },
+  ],
+  // wait 1 second after completion
+  post_trial_gap: 1000,
+  // record if in fullscreen
+  on_finish: function(data){
+    data.fullscreen = is_fullscreen();
+  },
+  // if the participant recorded anything except "puppy" then repeat
+  loop_function: function(data){
+    responses_data = JSON.parse(data.values()[1].responses);
+    if(responses_data.Attention_check == "puppy"){
+      return false
+    }else{
+      return true
+    }
+  },
+};
+   
+/*// CUSTOM SHUFFLE FUNCTION
+// SHUFFLES ALL BUT THE LAST ITEM AND SECOND LAST 'ITEM'
+function shuffle_all_but_last(a1){
+  last = a1.pop(); // taking the last item off of the list (the test item)
+  last2 = a1.pop(); // taking the second last item off of the list (the blank trial)
+  a1 = jsPsych.randomization.repeat(a1,1);
+  a1.push(last2); // presenting/adding the second last item back onto the list
+  a1.push(last); // presenting/adding the last item back onto the list, the test word
+  return(a1);
+}    
+ */   
+
+ // CUSTOM SHUFFLE FUNCTION
+function shuffle_variable(studywords_list){
+  for(i=0; i<studywords_list.length; i++){ //for every trial
+    W1 = studywords_list[i].stimulus1; // save the 4 words
+    W2 = studywords_list[i].stimulus2;
+    W3 = studywords_list[i].stimulus3;
+    W4 = studywords_list[i].stimulus4;
+    WL = [W1,W2,W3,W4]; // put words in a list
+    WL = jsPsych.randomization.repeat(WL,1); // randomize the list
+    studywords_list[i].stimulus1 = WL[0]; // replace words in actual variable
+    studywords_list[i].stimulus2 = WL[1];
+    studywords_list[i].stimulus3 = WL[2];
+    studywords_list[i].stimulus4 = WL[3];
+  }
+  return(studywords_list) // return that list to the variable
+}
+studywords=shuffle_variable(studywords); // this will use the above function and shuffle the words that you want shuffled
+
+// EXPERIMENTAL PHASE
+var study_phase = {
+  type: 'html-keyboard-response',
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000, //changed for testing, change back to 1000 for final experiment
+  post_trial_gap: 500,
+  timeline_variables: studywords, //calling studywords variable
+  timeline: 
+/* USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
+ shuffle_all_but_last([
+    {stimulus: jsPsych.timelineVariable('stimulus1')},
+    {stimulus: jsPsych.timelineVariable('stimulus2')},
+    {stimulus: jsPsych.timelineVariable('stimulus3')},
+    {stimulus: jsPsych.timelineVariable('stimulus4')},
+// LAST ITEM IS THE TEST WORD AND CHANGE PARAMETERS FOR THE TEST
+    {stimulus: (" ")}, // creating a blank trial so there is a 2 second gap between study and test
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},  
+  ]),
+  */
+
+// just in normal order now
+[
+    {stimulus: jsPsych.timelineVariable('stimulus1')},
+    {stimulus: jsPsych.timelineVariable('stimulus2')},
+    {stimulus: jsPsych.timelineVariable('stimulus3')},
+    {stimulus: jsPsych.timelineVariable('stimulus4')},
+    {stimulus: (" ")},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},
+ ],
+
+ // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
+  randomize_order: true,
+  data: jsPsych.timelineVariable("data"), //this will look for anything tagged with data in the timeline variable (here, studywords)
+ // NOT IMPORTANT, JUST FOR TESTING
+ on_finish: function(data){
+   //console.log(data);
+   //shuffle_variable(studywords)
+   //trial.timeline = shuffle_all_but_last(trial.timeline)
+},
+}
+    
+
+
+// set up debrief block
+var debrief = {
+  type: "html-keyboard-response",
+  stimulus: debrief_text,
+  //post_trial_gap: 1000
+};
+
+// set up full_screen mode
+var enter_full_screen = {
+  type: 'fullscreen',
+  fullscreen_mode: true,
+  message: fullscreen_prompt,
+  // disable button for 15 seconds to force reading
+  on_load: function(data){
+    var test = document.querySelectorAll('button')[0];
+    test.disabled = true;
+    setTimeout(() => {test.disabled = false;},15000);
+  }
+};
+
+// prepare an end to full_screen mode 
+var exit_full_screen = {
+  type: 'fullscreen',
+  fullscreen_mode: false,
+  // save data when going through exit full screen routine
+  // will save data at this point if they have alrady exited full screen
+  on_finish: function() {
+    firebase.database().ref(subject_id).set({
+      data: jsPsych.data.get().values()
+    })
+  }
+};
+
+// if a subject does not consent //
+var no_consent = {
+  timeline: [
+    {
+      type: "external-html",
+      url: "forms/no_consent_deb.html",
+      data: {"phase": "No_consent"},
+    },
+    ],
+  conditional_function: function(data){
+    if(consent_check == false){
+      return true
+    }else{
+      return false
+    }
+  }
+};
+
+/*set up experiment structure*/
+var timeline = [];
+timeline.push(consent); 
+timeline.push(no_consent);
+timeline.push(welcome);
+timeline.push(enter_full_screen);
+timeline.push(instructions);
+timeline.push(study_phase);
+//timeline.push(test_instructions);
+//timeline.push(test_phase);
+timeline.push(exit_full_screen);
+timeline.push(debrief);
+
+/*start experiment*/
+
+
+jsPsych.init({
+    timeline: timeline,
+    on_finish: function() {
+      window.location.href = "https://umanitobapsych.sona-systems.com/webstudy_credit.aspx?experiment_id=1303&credit_token=a035fd3a62b541dcae118ab791f90307&survey_code="+SONA_ID; //this needs to be changed
+      // display data at end:
+      //jsPsych.data.displayData();
+    }
+});
+
+
+  </script>
+  </html>
