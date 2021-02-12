@@ -204,6 +204,9 @@ function shuffle_all_but_last(a1){
 }    
  */   
 
+
+
+
  // CUSTOM SHUFFLE FUNCTION
 function shuffle_variable(studywords_list){
   for(i=0; i<studywords_list.length; i++){ //for every trial
@@ -230,17 +233,6 @@ var study_phase = {
   post_trial_gap: 500,
   timeline_variables: studywords, //calling studywords variable
   timeline: 
-/* USE THE CUSTOM FUNCTION TO SHUFFLE WORDS WITHIN A LIST
- shuffle_all_but_last([
-    {stimulus: jsPsych.timelineVariable('stimulus1')},
-    {stimulus: jsPsych.timelineVariable('stimulus2')},
-    {stimulus: jsPsych.timelineVariable('stimulus3')},
-    {stimulus: jsPsych.timelineVariable('stimulus4')},
-// LAST ITEM IS THE TEST WORD AND CHANGE PARAMETERS FOR THE TEST
-    {stimulus: (" ")}, // creating a blank trial so there is a 2 second gap between study and test
-    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},  
-  ]),
-  */
 
 // just in normal order now
 [
@@ -249,7 +241,11 @@ var study_phase = {
     {stimulus: jsPsych.timelineVariable('stimulus3')},
     {stimulus: jsPsych.timelineVariable('stimulus4')},
     {stimulus: (" ")},
-    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test')},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test1')},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test2')},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test3')},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test4')},
+    {choices: ["y","n"], trial_duration: 30000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test5')},
  ],
 
  // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS

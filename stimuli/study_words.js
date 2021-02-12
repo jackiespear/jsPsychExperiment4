@@ -3,24 +3,45 @@ studywords = [
 "stimulus2":"<p style='font-size: 48px;'>ROBIN</p>","data":{"type":"old","category":"birds","word":"ROBIN"},
 "stimulus3":"<p style='font-size: 48px;'>BLUEJAY</p>","data":{"type":"old","category":"birds","word":"BLUEJAY"},
 "stimulus4":"<p style='font-size: 48px;'>CONCEPT</p>","data":{"type":"distinct","category":"birds","word":"CONCEPT"},
-"test":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"EAGLE"}
+
+"test1":"<p style='font-size: 48px;'>EAGLE</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"EAGLE"},
+"test2":"<p style='font-size: 48px;'>ROBIN</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"ROBIN"},
+"test3":"<p style='font-size: 48px;'>BLUEJAY</p>","data":{"type":"old","category":"birds","test_type":"cat_test","word":"BLUEJAY"},
+"test4":"<p style='font-size: 48px;'>CONCEPT</p>","data":{"type":"old","category":"birds","test_type":"distinct_test","word":"CONCEPT"},
+"test5":"<p style='font-size: 48px;'>SALES</p>","data":{"type":"new","category":"birds","test_type":"unrelated_test","word":"SALES"},
 },
+
 {"stimulus1":"<p style='font-size: 48px;'>BLUE</p>","data":{"type":"old","category":"colors","word":"BLUE"},
 "stimulus2":"<p style='font-size: 48px;'>RED</p>","data":{"type":"old","category":"colors","word":"RED"},
 "stimulus3":"<p style='font-size: 48px;'>GREEN</p>","data":{"type":"old","category":"colors","word":"GREEN"},
 "stimulus4":"<p style='font-size: 48px;'>TERRORISM</p>","data":{"type":"distinct","category":"colors","word":"TERRORISM"},
-"test":"<p style='font-size: 48px;'>GREEN</p>","data":{"type":"old","category":"colors","test_type":"cat_test","word":"GREEN"}
+
+"test1":"<p style='font-size: 48px;'>BLUE</p>","data":{"type":"old","category":"colors","test_type":"cat_test","word":"BLUE"},
+"test2":"<p style='font-size: 48px;'>RED</p>","data":{"type":"old","category":"colors","test_type":"cat_test","word":"RED"},
+"test3":"<p style='font-size: 48px;'>GREEN</p>","data":{"type":"old","category":"colors","test_type":"cat_test","word":"GREEN"},
+"test4":"<p style='font-size: 48px;'>TERRORISM</p>","data":{"type":"old","category":"colors","test_type":"distinct_test","word":"TERRORISM"},
+"test5":"<p style='font-size: 48px;'>COVER</p>","data":{"type":"old","category":"colors","test_type":"unrelated_test","word":"COVER"},
 },
 {"stimulus1":"<p style='font-size: 48px;'>GASOLINE</p>","data":{"type":"old","category":"fuel","word":"GASOLINE"},
 "stimulus2":"<p style='font-size: 48px;'>DIESEL</p>","data":{"type":"old","category":"fuel","word":"DIESEL"},
 "stimulus3":"<p style='font-size: 48px;'>OIL</p>","data":{"type":"old","category":"fuel","word":"OIL"},
 "stimulus4":"<p style='font-size: 48px;'>GATHER</p>","data":{"type":"distinct","category":"fuel","word":"GATHER"},
-"test":"<p style='font-size: 48px;'>DIESEL</p>","data":{"type":"old","category":"fuel","test_type":"cat_test","word":"DIESEL"}
+
+"test1":"<p style='font-size: 48px;'>GASOLINE</p>","data":{"type":"old","category":"fuel","test_type":"cat_test","word":"GASOLINE"},
+"test2":"<p style='font-size: 48px;'>DIESEL</p>","data":{"type":"old","category":"fuel","test_type":"cat_test","word":"DIESEL"},
+"test3":"<p style='font-size: 48px;'>OIL</p>","data":{"type":"old","category":"fuel","test_type":"cat_test","word":"OIL"},
+"test4":"<p style='font-size: 48px;'>GATHER</p>","data":{"type":"old","category":"fuel","test_type":"distinct_test","word":"GATHER"},
+"test5":"<p style='font-size: 48px;'>GRANDPARENT</p>","data":{"type":"old","category":"fuel","test_type":"unrelated_test","word":"GRANDPARENT"},
 },
 {"stimulus1":"<p style='font-size: 48px;'>HOUSE</p>","data":{"type":"old","category":"dwelling","word":"HOUSE"},
 "stimulus2":"<p style='font-size: 48px;'>APARTMENT</p>","data":{"type":"old","category":"dwelling","word":"APARTMENT"},
 "stimulus3":"<p style='font-size: 48px;'>MANSION</p>","data":{"type":"old","category":"dwelling","word":"MANSION"},
 "stimulus4":"<p style='font-size: 48px;'>HIRE</p>","data":{"type":"distinct","category":"dwelling","word":"HIRE"},
-"test":"<p style='font-size: 48px;'>MYTH</p>","data":{"type":"new","category":"dwelling","test_type":"unrelated_test","word":"MYTH"}
+
+"test1":"<p style='font-size: 48px;'>HOUSE</p>","data":{"type":"new","category":"dwelling","test_type":"cat_test","word":"HOUSE"},
+"test2":"<p style='font-size: 48px;'>APARTMENT</p>","data":{"type":"new","category":"dwelling","test_type":"cat_test","word":"APARTMENT"},
+"test3":"<p style='font-size: 48px;'>MANSION</p>","data":{"type":"new","category":"dwelling","test_type":"cat_test","word":"MANSION"},
+"test4":"<p style='font-size: 48px;'>HIRE</p>","data":{"type":"new","category":"dwelling","test_type":"distinct_test","word":"HIRE"},
+"test5":"<p style='font-size: 48px;'>MYTH</p>","data":{"type":"new","category":"dwelling","test_type":"unrelated_test","word":"MYTH"},
 },
 ]
