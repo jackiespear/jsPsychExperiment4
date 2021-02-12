@@ -220,6 +220,21 @@ function shuffle_variable(studywords_list){
     studywords_list[i].stimulus2 = WL[1];
     studywords_list[i].stimulus3 = WL[2];
     studywords_list[i].stimulus4 = WL[3];
+
+    T1 = studywords_list[i].test1; // save the 4 words
+    T2 = studywords_list[i].test2;
+    T3 = studywords_list[i].test3;
+    T4 = studywords_list[i].test4;
+    T5 = studywords_list[i].test5;
+    TL = [T1,T2,T3,T4,T5]; // put words in a list
+    TL = jsPsych.randomization.repeat(TL,1); // randomize the list
+    studywords_list[i].test1 = TL[0]; // replace words in actual variable
+    studywords_list[i].test2 = TL[1];
+    studywords_list[i].test3 = TL[2];
+    studywords_list[i].test4 = TL[3];
+    studywords_list[i].test5 = TL[4];
+
+
   }
   return(studywords_list) // return that list to the variable
 }
