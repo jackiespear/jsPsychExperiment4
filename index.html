@@ -13,7 +13,6 @@
         <script src="jspsych-6.1.0/plugins/jspsych-survey-html-form.js"></script>
         <script src='stimuli/exp_text.js'></script>
         <script src='stimuli/study_words.js'></script>
-        <script src='stimuli/test_words.js'></script>
         <link href="jspsych-6.1.0/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body></body>
@@ -214,26 +213,50 @@ function shuffle_variable(studywords_list){
     W2 = studywords_list[i].stimulus2;
     W3 = studywords_list[i].stimulus3;
     W4 = studywords_list[i].stimulus4;
+    D1 = studywords_list[i].data1;
+    D2 = studywords_list[i].data2;
+    D3 = studywords_list[i].data3;
+    D4 = studywords_list[i].data4;
     WL = [W1,W2,W3,W4]; // put words in a list
-    WL = jsPsych.randomization.repeat(WL,1); // randomize the list
-    studywords_list[i].stimulus1 = WL[0]; // replace words in actual variable
-    studywords_list[i].stimulus2 = WL[1];
-    studywords_list[i].stimulus3 = WL[2];
-    studywords_list[i].stimulus4 = WL[3];
+    DL = [D1,D2,D3,D4]; // put the data tags in a list
+    //WL = jsPsych.randomization.repeat(WL,1); // randomize the list
+    my_ord = jsPsych.randomization.repeat([0,1,2,3],1);
+    studywords_list[i].stimulus1 = WL[my_ord[0]]; // replace words in actual variable
+    studywords_list[i].stimulus2 = WL[my_ord[1]];
+    studywords_list[i].stimulus3 = WL[my_ord[2]];
+    studywords_list[i].stimulus4 = WL[my_ord[3]];
 
-    T1 = studywords_list[i].test1; // save the 4 words
+    studywords_list[i].data1 = DL[my_ord[0]];
+    studywords_list[i].data2 = DL[my_ord[1]];
+    studywords_list[i].data3 = DL[my_ord[2]];
+    studywords_list[i].data4 = DL[my_ord[3]];
+
+
+    T1 = studywords_list[i].test1; // save the 5 test words
     T2 = studywords_list[i].test2;
     T3 = studywords_list[i].test3;
     T4 = studywords_list[i].test4;
     T5 = studywords_list[i].test5;
+    D1 = studywords_list[i].data5;
+    D2 = studywords_list[i].data6;
+    D3 = studywords_list[i].data7;
+    D4 = studywords_list[i].data8;
+    D5 = studywords_list[i].data9;
+    DL = [D1,D2,D3,D4,D5]; // put the data tags in a list
     TL = [T1,T2,T3,T4,T5]; // put words in a list
-    TL = jsPsych.randomization.repeat(TL,1); // randomize the list
-    studywords_list[i].test1 = TL[0]; // replace words in actual variable
-    studywords_list[i].test2 = TL[1];
-    studywords_list[i].test3 = TL[2];
-    studywords_list[i].test4 = TL[3];
-    studywords_list[i].test5 = TL[4];
+    my_ord = jsPsych.randomization.repeat([0,1,2,3,4],1);
+    //TL = jsPsych.randomization.repeat(TL,1); // randomize the list
+    studywords_list[i].test1 = TL[my_ord[0]]; // replace words in actual variable
+    studywords_list[i].test2 = TL[my_ord[1]];
+    studywords_list[i].test3 = TL[my_ord[2]];
+    studywords_list[i].test4 = TL[my_ord[3]];
+    studywords_list[i].test5 = TL[my_ord[4]];
 
+    studywords_list[i].data5 = DL[my_ord[0]];
+    studywords_list[i].data6 = DL[my_ord[1]];
+    studywords_list[i].data7 = DL[my_ord[2]];
+    studywords_list[i].data8 = DL[my_ord[3]];
+    studywords_list[i].data9 = DL[my_ord[4]];
 
   }
   return(studywords_list) // return that list to the variable
@@ -251,21 +274,25 @@ var study_phase = {
 
 // just in normal order now
 [
-    {stimulus: jsPsych.timelineVariable('stimulus1')},
-    {stimulus: jsPsych.timelineVariable('stimulus2')},
-    {stimulus: jsPsych.timelineVariable('stimulus3')},
-    {stimulus: jsPsych.timelineVariable('stimulus4')},
-    {stimulus: ("<p style ='font-size: 48px;'>+</p>")},
-    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test1')},
-    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test2')},
-    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test3')},
-    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test4')},
-    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test5')},
+    {stimulus: jsPsych.timelineVariable('stimulus1'), data: jsPsych.timelineVariable('data1')},
+    {stimulus: jsPsych.timelineVariable('stimulus2'), data: jsPsych.timelineVariable('data2')},
+    {stimulus: jsPsych.timelineVariable('stimulus3'), data: jsPsych.timelineVariable('data3')},
+    {stimulus: jsPsych.timelineVariable('stimulus4'), data: jsPsych.timelineVariable('data4')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test1'),data: jsPsych.timelineVariable('data5')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test2'),data: jsPsych.timelineVariable('data6')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test3'),data: jsPsych.timelineVariable('data7')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test4'),data: jsPsych.timelineVariable('data8')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test5'),data: jsPsych.timelineVariable('data9')},
  ],
 
  // THIS RANDOMIZES THE ORDER OF THE LISTS OF WORDS
   randomize_order: true,
-  data: jsPsych.timelineVariable("data"), //this will look for anything tagged with data in the timeline variable (here, studywords)
+  //data: jsPsych.timelineVariable("data"), //this will look for anything tagged with data in the timeline variable (here, studywords)
  // NOT IMPORTANT, JUST FOR TESTING
  on_finish: function(data){
    //console.log(data);
@@ -329,11 +356,11 @@ var no_consent = {
 
 /*set up experiment structure*/
 var timeline = [];
-timeline.push(consent); 
-timeline.push(no_consent);
-timeline.push(welcome);
-timeline.push(enter_full_screen);
-timeline.push(instructions);
+//timeline.push(consent); 
+//timeline.push(no_consent);
+//timeline.push(welcome);
+//timeline.push(enter_full_screen);
+//timeline.push(instructions);
 timeline.push(study_phase);
 //timeline.push(test_instructions);
 //timeline.push(test_phase);
