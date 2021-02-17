@@ -1,4 +1,4 @@
-var welcome_text = "<p>Welcome to the experiment. This experiment should take no longer than 10 minutes.</p> <p>Press any key to begin.</p>";
+var welcome_text = "<p>Welcome to the experiment. This experiment should take no longer than 15 minutes.</p> <p>Press any key to begin.</p>";
 
 var instruction_text = "<p>Please read these instructions carefully.</p>"+"<p> During each study block, you will be shown 4 words. Then, your job will be to indicate whether you studied a word or you did not, for 5 trials. This cycle will continue for a total of 36 times. The entire experiment should take approximately 10 minutes. We are interested in how long people take to recognize particular words. Please respond as <b>quickly</b> as possible, without making any mistakes. Also, when prompted to provide a word, respond by typing in the word 'puppy'. You will receive one credit in exchange for your participation. The researcher may be contacted by email at umspear@myumanitoba.ca.</p>"+"<p>Press any key to begin.</p>";
 
