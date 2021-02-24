@@ -36,14 +36,14 @@
  // Your web app's Firebase configuration (given to us by firebase)
  // Only need to change this chunk each time you're using a new Firebase Project
  var firebaseConfig = {
-  apiKey: "AIzaSyDL2NlFJq5Nz8k3zpz3IxqZeHTa1oBUTto", // start changing at this line
-    authDomain: "fouritemrecognition2.firebaseapp.com",
-    databaseURL: "https://fouritemrecognition2-default-rtdb.firebaseio.com",
-    projectId: "fouritemrecognition2",
-    storageBucket: "fouritemrecognition2.appspot.com",
-    messagingSenderId: "413701622864",
-    appId: "1:413701622864:web:86290acc7314945fb41555",
-    measurementId: "G-3Y9P1JZFYP"  //last line that needs changing for new Firebase projects
+  apiKey: "AIzaSyAKc-sA0u5uT5G5ITEp1yQZW-a57wzfcTQ", //start changing at this line
+    authDomain: "fourstudyeighttest.firebaseapp.com",
+    databaseURL: "https://fourstudyeighttest-default-rtdb.firebaseio.com",
+    projectId: "fourstudyeighttest",
+    storageBucket: "fourstudyeighttest.appspot.com",
+    messagingSenderId: "15085741159",
+    appId: "1:15085741159:web:a648a877c7c4256f4460c2",
+    measurementId: "G-SN9QWZFZR0" //last line that needs to be changed
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
@@ -232,31 +232,43 @@ function shuffle_variable(studywords_list){
     studywords_list[i].data4 = DL[my_ord[3]];
 
 
-    T1 = studywords_list[i].test1; // save the 5 test words
+    T1 = studywords_list[i].test1; // save the 8 test words
     T2 = studywords_list[i].test2;
     T3 = studywords_list[i].test3;
     T4 = studywords_list[i].test4;
     T5 = studywords_list[i].test5;
-    D1 = studywords_list[i].data5;
+    T6 = studywords_list[i].test6;
+    T7 = studywords_list[i].test7;
+    T8 = studywords_list[i].test8;
+    D1 = studywords_list[i].data5; //save the 8 data tags
     D2 = studywords_list[i].data6;
     D3 = studywords_list[i].data7;
     D4 = studywords_list[i].data8;
     D5 = studywords_list[i].data9;
-    DL = [D1,D2,D3,D4,D5]; // put the data tags in a list
-    TL = [T1,T2,T3,T4,T5]; // put words in a list
-    my_ord = jsPsych.randomization.repeat([0,1,2,3,4],1);
+    D6 = studywords_list[i].data10;
+    D7 = studywords_list[i].data11;
+    D8 = studywords_list[i].data12;
+    DL = [D1,D2,D3,D4,D5,D6,D7,D8]; // put the data tags in a list
+    TL = [T1,T2,T3,T4,T5,T6,T7,T8]; // put words in a list
+    my_ord = jsPsych.randomization.repeat([0,1,2,3,4,5,6,7],1);
     //TL = jsPsych.randomization.repeat(TL,1); // randomize the list
     studywords_list[i].test1 = TL[my_ord[0]]; // replace words in actual variable
     studywords_list[i].test2 = TL[my_ord[1]];
     studywords_list[i].test3 = TL[my_ord[2]];
     studywords_list[i].test4 = TL[my_ord[3]];
     studywords_list[i].test5 = TL[my_ord[4]];
+    studywords_list[i].test6 = TL[my_ord[5]];
+    studywords_list[i].test7 = TL[my_ord[6]];
+    studywords_list[i].test8 = TL[my_ord[7]];
 
     studywords_list[i].data5 = DL[my_ord[0]];
     studywords_list[i].data6 = DL[my_ord[1]];
     studywords_list[i].data7 = DL[my_ord[2]];
     studywords_list[i].data8 = DL[my_ord[3]];
     studywords_list[i].data9 = DL[my_ord[4]];
+    studywords_list[i].data10 = DL[my_ord[5]];
+    studywords_list[i].data11 = DL[my_ord[6]];
+    studywords_list[i].data12 = DL[my_ord[7]];
 
   }
   return(studywords_list) // return that list to the variable
@@ -279,15 +291,22 @@ var study_phase = {
     {stimulus: jsPsych.timelineVariable('stimulus3'), data: jsPsych.timelineVariable('data3')},
     {stimulus: jsPsych.timelineVariable('stimulus4'), data: jsPsych.timelineVariable('data4')},
     {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
-    {choices: ["y","n"], trial_duration: 5000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test1'),data: jsPsych.timelineVariable('data5')},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test1'),data: jsPsych.timelineVariable('data5')},
     {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
-    {choices: ["y","n"], trial_duration: 5000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test2'),data: jsPsych.timelineVariable('data6')},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test2'),data: jsPsych.timelineVariable('data6')},
     {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
-    {choices: ["y","n"], trial_duration: 5000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test3'),data: jsPsych.timelineVariable('data7')},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test3'),data: jsPsych.timelineVariable('data7')},
     {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
-    {choices: ["y","n"], trial_duration: 5000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test4'),data: jsPsych.timelineVariable('data8')},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test4'),data: jsPsych.timelineVariable('data8')},
     {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
-    {choices: ["y","n"], trial_duration: 5000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test5'),data: jsPsych.timelineVariable('data9')},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test5'),data: jsPsych.timelineVariable('data9')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test6'),data: jsPsych.timelineVariable('data10')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test7'),data: jsPsych.timelineVariable('data11')},
+    {stimulus: ("<p style ='font-size: 48px;'>+</p>"), data: {"phase":"fixationpoint"}},
+    {choices: ["y","n"], trial_duration: 2000, prompt: "Press <b>'y'</b> for old and <b>'n'</b> for new", stimulus: jsPsych.timelineVariable('test8'),data: jsPsych.timelineVariable('data12')},
+    {stimulus: (" ")},
     {stimulus: (" ")},
  ],
 
